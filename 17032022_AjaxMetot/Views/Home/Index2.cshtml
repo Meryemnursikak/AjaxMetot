@@ -1,0 +1,39 @@
+﻿@using _17032022_AjaxMetot.Models
+@model Model1
+@{
+    ViewBag.Title = "Index2";
+}
+
+<h2>Index2</h2>
+
+@using(Ajax.BeginForm("Index2",
+    new AjaxOptions() { HttpMethod="POST",
+        LoadingElementId= "loading",
+        LoadingElementDuration=1000,
+        UpdateTargetId="sonuc",
+        InsertionMode=InsertionMode.InsertAfter
+    }))
+{
+<div>
+    @Html.TextBoxFor(x=>x.Text,
+    new {@class="form-control"})
+</div>
+<div>
+    <button type="submit" class="btn btn-success">Gönder</button>
+</div>
+}
+
+<hr />
+<ul class="list-group" id="sonuc">
+    <li id="loading" class="list-group-item list-group-item-warning" style="display:none;">yükleniyor...</li>
+  
+    @if (ViewBag.liste2 != null)
+    {
+        foreach (var item in ViewBag.liste2)
+        {
+            <li id="@item.ID" 
+             class="list-group-item">@item.Text</li>
+        }
+    }
+</ul>
+
